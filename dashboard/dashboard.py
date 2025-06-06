@@ -117,7 +117,7 @@ if st.button("Run Test"):
                         break
                     time.sleep(1)
                 st.session_state.test_running = False
-                st.experimental_rerun()  # Force rerun to show results immediately
+                st.rerun()  # Force rerun to show results immediately
             timer = Timer(run_time_seconds, stop_test)
             timer.start()
             st.success(f"Test started: {concurrency} users, {spawn_rate} spawn rate, {run_time} duration.")
