@@ -5,7 +5,6 @@ from locust import HttpUser, task, between
 load_dotenv()
 API_KEY = os.getenv("SARVAM_API_KEY")
 
-
 class TransliterationUser(HttpUser):
     wait_time = between(1, 5)  # Waiting 1-5 seconds between tasks to simulate realistic user behavior
 
