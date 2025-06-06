@@ -1,10 +1,29 @@
-# Sarvam Transliteration API Load Testing
+<!-- filepath: /home/asus/Desktop/Sarvam_TASK/README.md -->
 
-This repository provides a complete solution for load testing the [Sarvam Transliteration API](https://docs.sarvam.ai/api-reference-docs/text/transliterate). It includes scripts for automated load tests, a Streamlit-based dashboard for configuration and live monitoring, and tools for aggregating and analyzing results. The project is designed for both quick, simple tests and advanced, customizable load sweeps, with clear reporting and troubleshooting guidance.
+<p align="center">
+  <img src="https://img.shields.io/badge/Load%20Testing-Sarvam%20Transliteration%20API-blueviolet" alt="Sarvam Transliteration API Load Testing"/>
+</p>
+
+<h1 align="center">Sarvam Transliteration API Load Testing 🚀</h1>
+
+<p align="center">
+  <a href="https://docs.sarvam.ai/api-reference-docs/text/transliterate">API Docs</a> |
+  <a href="#dashboard-features">Dashboard Features</a> |
+  <a href="#google-sheets-report">Google Sheets Report</a>
+</p>
 
 ---
 
-## Table of Contents
+> **A complete solution for load testing the [Sarvam Transliteration API](https://docs.sarvam.ai/api-reference-docs/text/transliterate):**
+> - Automated load test scripts
+> - Streamlit dashboard for configuration & live monitoring
+> - Tools for aggregating and analyzing results
+> - Designed for both quick and advanced load sweeps
+> - Clear reporting and troubleshooting guidance
+
+---
+
+## 📑 Table of Contents
 
 - [Project Structure](#project-structure)
 - [Requirements](#requirements)
@@ -18,25 +37,28 @@ This repository provides a complete solution for load testing the [Sarvam Transl
 
 ---
 
-## Project Structure
+## 🗂️ Project Structure
 
-- `API_Requests.py`: Locust script defining load test tasks for transliterating text in Hindi, Tamil, and Bengali.
-- `dashboard.py`: Streamlit dashboard for configuring and running tests, displaying live metrics (latency, RPS, error rate), and showing final results with language-specific p95 latency.
-- `run_tests.sh`: Bash script to perform a load sweep with varying user counts and spawn rates.
-- `process_results.py`: Aggregates CSV outputs into a `summary.csv` for analysis.
-- `<prefix>_stats.csv`, `<prefix>_stats_history.csv`: CSV files generated per test (e.g., `simple_test_stats.csv`).
-- `summary.csv`: Aggregated results from all tests.
-- `requirements.txt`: Lists all Python dependencies for the project.
-- `.env`: (Optional) File for storing environment variables such as API keys.
-- `Report/`: Contains the final PDF report.
+| File/Folder                | Description                                                                 |
+|---------------------------|-----------------------------------------------------------------------------|
+| `API_Requests.py`         | Locust script for load test tasks (Hindi, Tamil, Bengali)                    |
+| `dashboard.py`            | Streamlit dashboard for config, live metrics, and results                    |
+| `run_tests.sh`            | Bash script for load sweep (varying users/spawn rates)                       |
+| `process_results.py`      | Aggregates CSV outputs into `summary.csv`                                    |
+| `<prefix>_stats.csv`      | Per-test CSV stats (e.g., `simple_test_stats.csv`)                           |
+| `<prefix>_stats_history.csv` | Per-test CSV history                                                        |
+| `summary.csv`             | Aggregated results from all tests                                            |
+| `requirements.txt`        | Python dependencies                                                          |
+| `.env`                    | (Optional) API keys and environment variables                                |
+| `Report/`                 | Final PDF report                                                             |
 
 ---
 
-## Requirements
+## 🛠️ Requirements
 
-All dependencies are listed in `requirements.txt`. Example contents:
+All dependencies are listed in `requirements.txt`:
 
-```
+```bash
 streamlit
 requests
 plotly
@@ -45,7 +67,7 @@ locust
 python-dotenv
 ```
 
-Install all dependencies with:
+Install all dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -53,7 +75,7 @@ pip install -r requirements.txt
 
 ---
 
-## Setup
+## ⚙️ Setup
 
 1. **Clone the Repository**
 
@@ -74,17 +96,18 @@ pip install -r requirements.txt
 
 ---
 
-## .env File Setup
+## 🔐 .env File Setup
 
-Create a `.env` file in the project root with the following content:
+Create a `.env` file in the project root:
 
-```
+```env
 SARVAM_API_KEY=your_api_key_here
 ```
 
-Replace `your_api_key_here` with your actual Sarvam API key (Get it From [here](https://dashboard.sarvam.ai/)). The project uses `python-dotenv` to automatically load environment variables from this file.
+- Replace `your_api_key_here` with your actual Sarvam API key ([Get it here](https://dashboard.sarvam.ai/)).
+- The project uses `python-dotenv` to load environment variables automatically.
 
-Alternatively, you can export the variable in your shell:
+Alternatively, export the variable in your shell:
 
 ```bash
 export SARVAM_API_KEY="your_api_key_here"
@@ -92,7 +115,7 @@ export SARVAM_API_KEY="your_api_key_here"
 
 ---
 
-## Running Tests
+## 🚦 Running Tests
 
 1. **Free Required Ports**
 
@@ -130,17 +153,17 @@ export SARVAM_API_KEY="your_api_key_here"
    ```
 
    - Open [http://localhost:8501](http://localhost:8501) in your browser.
-   - Choose "Simple" (1 user, 1 spawn rate, 1m) or "Custom" test type.
+   - Choose **Simple** (1 user, 1 spawn rate, 1m) or **Custom** test type.
    - Configure concurrency, spawn rate, run time (e.g., `30s`), and CSV prefix as needed.
-   - Click "Run Test" to view live metrics and final results.
+   - Click **Run Test** to view live metrics and final results.
 
 ---
 
-## Dashboard Features
+## 📊 Dashboard Features
 
 - **Test Configuration**
-  - *Simple Mode*: Fixed parameters (1 user, 1 spawn rate, 1m duration, `simple_test` prefix).
-  - *Custom Mode*: User-defined concurrency, spawn rate, run time, and CSV prefix.
+  - *Simple Mode*: Fixed parameters (1 user, 1 spawn rate, 1m duration, `simple_test` prefix)
+  - *Custom Mode*: User-defined concurrency, spawn rate, run time, and CSV prefix
 
 - **Live Metrics**
   - Median, average, and p95 latency (ms)
@@ -151,18 +174,18 @@ export SARVAM_API_KEY="your_api_key_here"
   - Total requests, RPS, average/p50/p75/p95 latency, error rate
   - Language-specific p95 latency (Hindi, Tamil, Bengali) with a bar chart
 
-  There is a bug currently where you need to refresh the page for the final results, however all the csv files are saved in the dashboard directory correclty.
+  > **Note:** There is a bug where you need to refresh the page for final results. All CSV files are saved correctly in the dashboard directory.
 
 - **CSV Output**
   - Generates `<prefix>_stats.csv` and `<prefix>_stats_history.csv` per test
 
 ---
 
-## Google Sheets Report
+## 📈 Google Sheets Report
 
 A detailed Google Sheets report is available for further analysis and visualization:
 
-[Load Test Results](https://docs.google.com/spreadsheets/d/1q0pvpEDn8v3_VsigQ7yOEAKGq1fv7nacC9gM7VlR4Y4/)
+[**Sarvam Transliteration API Load Test Results**](https://docs.google.com/spreadsheets/d/1q0pvpEDn8v3_VsigQ7yOEAKGq1fv7nacC9gM7VlR4Y4/)
 
 - **Tabs:**
   - *Summary Dashboard*: Visualizations of key metrics
@@ -171,7 +194,7 @@ A detailed Google Sheets report is available for further analysis and visualizat
 
 ---
 
-## Troubleshooting
+## 🛠️ Troubleshooting
 
 - **Port Conflicts**
   - Free ports `8089`/`8090` as shown in Setup.
@@ -183,7 +206,7 @@ A detailed Google Sheets report is available for further analysis and visualizat
 
 ---
 
-## Notes
+## 📝 Notes
 
 - The dashboard uses a single Locust instance on port `8089` for live metrics and a headless instance on port `8090` for CSV generation.
 - If live metrics fail, verify API connectivity.
@@ -191,4 +214,6 @@ A detailed Google Sheets report is available for further analysis and visualizat
 
 ---
 
-**For questions or contributions, please open an issue or submit a pull request.**
+<p align="center">
+  <b>For questions or contributions, please open an issue or submit a pull request.</b>
+</p>
