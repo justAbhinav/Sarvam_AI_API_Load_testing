@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# Simple configuration
-locust -f API_test.py --host=https://api.sarvam.ai --users=1 --spawn-rate=1 --run-time=1m --csv=simple_test --headless
+# Simple configuration to test the API
+locust -f API_Requests.py --host=https://api.sarvam.ai --users=1 --spawn-rate=1 --run-time=1m --csv=simple_test --headless
 
-# Load sweep configurations
+# Load sweep configurations for testing different user loads
+# Each test will run with different parameters for users, spawn rate, and run time
+# The results will be saved in CSV files with a prefix for each test
 for i in 1 2 3 4; do
     if [ $i -eq 1 ]; then
         users=1; spawn_rate=1; run_time=1m; prefix=test1
@@ -14,5 +16,5 @@ for i in 1 2 3 4; do
     elif [ $i -eq 4 ]; then
         users=25; spawn_rate=4; run_time=5m; prefix=test4
     fi
-    locust -f API_test.py --host=https://api.sarvam.ai --users=$users --spawn-rate=$spawn_rate --run-time=$run_time --csv=$prefix --headless
+    locust -f API_Requests.py --host=https://api.sarvam.ai --users=$users --spawn-rate=$spawn_rate --run-time=$run_time --csv=$prefix --headless
 done

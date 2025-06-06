@@ -1,7 +1,7 @@
 import pandas as pd
 import glob
 
-# Find all stats CSV files
+# Finding all stats CSV files for all the tests
 csv_files = glob.glob("*_stats.csv")
 summary_data = []
 
@@ -9,7 +9,7 @@ for file in csv_files:
     df = pd.read_csv(file)
     test_name = file.replace("_stats.csv", "")
     
-    # Extract aggregated metrics
+    # Extracting the aggregated metrics
     agg_row = df[df["Name"] == "Aggregated"].iloc[0]
     total_requests = agg_row["Request Count"]
     total_failures = agg_row["Failure Count"]
@@ -26,7 +26,7 @@ for file in csv_files:
         "Error Rate (%)": error_rate
     }
 
-    # Extract language-specific p95 latency
+    # Extracting language-specific p95 latency
     languages = ["Hi", "Ta", "Bn"]  # Hindi, Tamil, Bengali
     for lang in languages:
         lang_row = df[df["Name"] == f"Transliterate {lang}"]
@@ -37,7 +37,7 @@ for file in csv_files:
 
     summary_data.append(metrics)
 
-# Save to summary.csv
+# Saving to summary.csv
 summary_df = pd.DataFrame(summary_data)
 summary_df.to_csv("summary.csv", index=False)
 print("Summary saved to summary.csv")
