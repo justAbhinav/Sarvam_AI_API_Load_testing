@@ -1,0 +1,4 @@
+Method,Name,Error,Occurrences
+POST,Transliterate Bn,HTTPError('429 Client Error: Too Many Requests for url: Transliterate Bn'),253
+POST,Transliterate Hi,HTTPError('429 Client Error: Too Many Requests for url: Transliterate Hi'),298
+POST,Transliterate Ta,HTTPError('429 Client Error: Too Many Requests for url: Transliterate Ta'),276
